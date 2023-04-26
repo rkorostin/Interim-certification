@@ -37,14 +37,22 @@ class NotesApp:
             if note.id == id:
                 note.title = title
                 note.content = content
-                print("Примечание успешно отредактировано")
+                print("Заметка успешно отредактирована")
                 return
-        print("Заметок не найдено")
+        print("Заметка не найдена")
 
     def delete_note(self, id):
         for note in self.notes:
             if note.id == id:
                 self.notes.remove(note)
-                print("Примечание успешно удалено")
+                print("Заметка успешно удалена")
                 return
         print("Заметка не найдена")
+
+    def search_notes(self, start_date, end_date):
+        filtered_notes = [note for note in self.notes if start_date <= note.created_at.date() <= end_date]
+        if filtered_notes:
+            for note in filtered_notes:
+                print(f"{note.id}: {note.title}\n{note.content}\nСоздано: {note.created_at}\n")
+        else:
+            print("Заметки не найдены")
