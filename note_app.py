@@ -16,7 +16,7 @@ class NotesApp:
         print("Заметка успешно добавлена")
 
     def save_notes(self):
-        with open("notes.csv", "w", newline='') as f:
+        with open("notes.csv", "w", newline='', encoding='utf-8') as f:
             writer = csv.writer(f, delimiter=';')
             writer.writerow(["id", "title", "content", "created_at"])
             for note in self.notes:
@@ -25,7 +25,7 @@ class NotesApp:
 
     def load_notes(self):
         try:
-            with open("notes.csv", "r") as f:
+            with open("notes.csv", "r", encoding='utf-8') as f:
                 reader = csv.DictReader(f, delimiter=';')
                 self.notes = [Note.from_dict(row) for row in reader]
             print("Заметки успешно загружены")
